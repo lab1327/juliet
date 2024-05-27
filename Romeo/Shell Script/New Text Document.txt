@@ -1,0 +1,240 @@
+
+Q1 . Write a Shell script that calculate the sum of first n natural numbers.
+student@admins-iMac ~ % touch sumofnnumber.sh
+student@admins-iMac ~ % chmod +x sumofnumber.sh
+chmod: sumofnumber.sh: No such file or directory
+student@admins-iMac ~ % chmod +x sumofnnumber.sh
+student@admins-iMac ~ % nano sumofnnumber.sh
+student@admins-iMac ~ % cat sumofnnumber.sh
+#!/bin/bash
+echo "Enter a number (N):"
+read N
+sum=0
+for((i=1;i<=$N;i++));do
+sum=$((sum+i))
+done
+echo "Sum of integers from 1 to $N is : $sum”
+student@admins-iMac ~ % ./sumofnnumber.sh
+Enter a number (N):
+5
+Sum of integers from 1 to 5 is : 15
+
+Q2 Write a shell script to search specific word and count its occurrence
+student@admins-iMac ~ % touch word_count.sh
+student@admins-iMac ~ % chmod +x word_count.sh
+student@admins-iMac ~ % nano word_count.sh
+student@admins-iMac ~ % touch wordappers.txt
+student@admins-iMac ~ % cat >wordappers.txt
+hello my name is hello  
+i am krushna hello
+here krushna is  hello^C
+student@admins-iMac ~ % cat word_count.sh
+#!/bin/bash
+echo "Enter the word to search for:"
+read target_word
+echo "enter the filename : "
+read filename
+count=$(grep -o -w "$target_word" "$filename"|wc -l)echo "The word '$target_word' appers $count times in ‘$filename'."
+student@admins-iMac ~ % ./word_count.sh
+Enter the word to search for:
+hello
+enter the filename : 
+wordappers.txt
+The word 'hello' appears 3 times in ‘wordappers.txt'.
+
+Q3. Based on weight and age define whether the person is overweight, underweight or normal using if else
+
+KrushnaG@KrushnaG-VirtualBox:~$ touch weight.sh
+KrushnaG @ KrushnaG -VirtualBox:~$ chmod +x weight.sh
+KrushnaG @ KrushnaG -VirtualBox:~$ nano weight.sh
+KrushnaG @ KrushnaG -VirtualBox:~$ cat weight.sh
+#!/bin/bash
+read -p "Enter weight (in kg): " weight
+read -p "Enter age: " age
+if (( age < 18 )); then
+    echo "Age is less than 18. Classification not applicable for minors."
+elif (( weight < 50 )); then
+    echo "Underweight"
+elif (( weight >= 50 && weight <= 70 )); then
+    echo "Normal weight"
+else
+    echo "Overweight"
+fi
+KrushnaG @ KrushnaG -VirtualBox:~$ ./weight.sh
+Enter weight (in kg): 66
+Enter age: 21
+Normal weight
+
+
+
+
+1. Basic Arithmetic: Binary to Decimal Converter:-
+
+#!/bin/bash
+
+echo "Enter Binary Number: "
+read n
+
+i=0
+num=0
+
+for ((i=0;n>0;i++)) {  
+    digit=$((n % 10))
+    num=$(($num + digit * 2**i))  
+    n=$((n / 10))
+}
+
+echo "Resultant Decimal Number: $num"
+
+
+
+
+
+
+
+
+2. Command line: Calculate area of Circle
+
+#!/bin/bash
+
+read -p "Enter the radius of the circle: " radius
+
+area=$(echo " 3.14159 * $radius * $radius" | bc)
+
+echo "The area of the circle is $area square units."
+
+
+
+
+
+
+
+
+
+
+3. Conditional statements and loops : Checking if a number is a multiple of 2 and 7 both
+
+
+#!/bin/bash
+
+read -p "Enter a number: " number
+
+if (( number % 2 == 0 && number % 7 == 0 )); then
+   echo "$number is a multiple of both 2 and 7."
+else
+   echo "$number is not a multiple of both 2 and 7."
+fi
+
+
+
+4.Conditional statements and loops: HCF of 2 numbers
+
+#!/bin/bash
+
+read -p "Enter the first number: " num1
+read -p "Enter the second number: " num2
+
+if (( num1 < num2 )); then
+    larger=$num2
+    smaller=$num1
+else
+    larger=$num1
+    smaller=$num2
+fi
+
+remainder=$larger
+while (( remainder != 0 )); do
+    remainder=$(( larger % smaller ))
+    larger=$smaller
+    smaller=$remainder
+done
+
+echo "The HCF of $num1 and $num2 is $larger."
+
+
+5. Arrays: Storing elements in array and printing them in reverse order
+#!/bin/bash
+
+arr=(10 20 30 40 50)
+
+sum=0
+
+for i in "${arr[@]}"; do
+    sum=$((sum + i))
+done
+
+echo "The sum of the array elements is: $sum"
+
+
+
+
+
+
+
+
+6. String: Take a string as input and reverse it
+
+#!/bin/bash
+
+read -p "Enter string: " string
+
+len=${#string}  #
+reverse="" 
+for ((i = len - 1; i >= 0; i--)); do
+    reverse="${reverse}${string:$i:1}"  #done
+
+echo "$reverse"  
+ 
+
+
+7. File Operation: Rename a file circle.sh to  virtual.sh
+#!/bin/bash
+
+Mv circle.sh virtual.sh
+
+8. Functions: Fibonacci Numbers
+
+#!/bin/bash
+
+fibonacci() {
+    n=$1
+    a=0
+    b=1
+
+    for ((i = 0; i < n; i++)); do
+        echo -n "$a "
+
+        temp=$a
+        a=$b
+        b=$((temp + b))
+    done
+    echo
+}
+fibonacci 11
+
+
+
+9 .Execution of Linux commands in shell:
+
+#!/bin/bash
+
+echo "Please enter a Linux command to execute:"
+read user_command
+
+echo "Executing command: $user_command"
+$user_command
+
+# Check the exit status of the command
+if [ $? -eq 0 ]; then
+    echo "Command executed successfully!"
+else
+    echo "Oops! Something went wrong with the command."
+fi
+
+echo "Script execution completed."
+
+
+
+
+
+

@@ -1,0 +1,299 @@
+1) Change your password to a password you would like to use for the
+remainder of the semester.
+    passwd
+    Changing password for krushna.
+    Current password:
+    New password:
+    Retype new password:
+    passwd: password updated successfully
+
+2) Display the systems date.
+    date
+    Tuesday 30 January 2024 09:11:31 PM IST
+
+3) Count the number of lines in the /etc/passwd file
+    wc -l /etc/passwd
+    48 /etc/passwd
+
+
+4) Find out who else is on the system
+    who
+    krushna tty2 2024-01-30 20:48 (tty2)
+
+5) Direct the output of the main pages for the date command to a file
+named mydate.
+    man date > mydate
+    nano mydate
+
+6) Create a subdirectory called mydir
+    mkdir mydir
+
+7) Move the file mydate into the new subdirectory
+    mv mydate mydir/
+
+8) Go to the subdirectory mydir and copy the file mydate to a new file
+called ourdate
+    cd mydir
+    cp mydate ourdate
+
+9) List the contents of mydir
+    ls
+    mydate ourdate
+
+10) Do a long listing on the file ourdate and note the permissions.
+    ls -l ourdate
+    -rw-rw-r-- 1 krushna krushna 6516 Jan 30 21:34 ourdate
+
+11) Display the name of the current directory starting from the root
+    pwd
+    /home/krushna/mydir
+
+12) Move the files in the directory mydir back to your home directory
+    mv * ~
+
+13) Display the first five lines of mydate
+    head -n 5 mydate
+    DATE(1) User Commands DATE(1)
+    NAME
+    date - print or set the system date and time
+
+14) Display the last 8 lines of mydate
+    tail -n 8 mydate
+    This is free software: you are free to change and redistribute it.
+    There is NO WARRANTY, to the extent permitted by law.
+    SEE ALSO
+    Full documentation <https://www.gnu.org/software/coreutils/date>
+    or available locally via: info '(coreutils) date invocation'
+    GNU coreutils 8.32 February 2022 DATE(1)
+
+15) Remove the directory mydir
+    rm -r mydir
+
+16) Redirect the output of the long listing of files to a file named list
+    ls -l >list
+
+17) Select any 5 capital states in India and enter them in a file named
+capitals1 . choose 5 more capitals and enter them in a file named
+capitals2. Choose 5 more capitals and enter them in a file named
+capitals3. Concatenate all 3 files and redirect the output to a file
+named capitals.
+        echo "Delhi" > capitals1
+        echo "Mumbai" >> capitals1
+        echo "Kolkata" >> capitals1
+        echo "Chennai" >> capitals1
+        echo "Banglore" >> capitals1
+        echo "Hyderabad" > capitals2
+        echo "Jaipur" >> capitals2
+        echo "Lucknow" >> capitals2
+        echo "Thiruvnantpuram" >> capitals2
+        echo "Bhopal" >> capitals2
+        echo "Ahmedabad" > capitals3
+        echo "Patna" >> capitals3
+        echo "Dispur" >> capitals3
+        echo "Jammu" >> capitals3
+        echo "Ladakh" >> capitals3
+        cat capitals1 capitals2 capitals3 > capitals
+
+18) Concatenate the file capitals2 at the end of file capitals
+        cat capitals2 >> capitals
+
+19) Give read and write permissions to all users for the file capitals
+    chmod 666 capitals
+
+20) Give read permission only to the owner of the file capitals. Open
+the file , make some changes and try to save it . What happens?
+        chmod 400 capitals
+        Now, if you try to open the file capitals, make changes, and save it, you
+        will likely encounter a permission denied error when you attempt to save
+        the changes. This is because you have only read permission on the file,
+        and you're not allowed to modify it.
+        The specific behavior may vary depending on the text editor you're using
+        and the operating system's file system permissions handling. However,
+        generally, if you try to save changes to a file for which you have read-only
+        permissions, the operation will fail, and you'll be informed that you don't
+        have the necessary permissions to modify the file.
+
+21) Create an Alias to Concatenate the 3 files capitals1 , capitals2 ,
+capitals3 and redirect the output to a file named capitals . Activate the
+alias and make it run.
+        alias concat_caps='cat capitals1 capitals2 capitals3 > capitals'
+        source ~/.bashrc
+        concat_caps
+
+22) Find the number of times the string “the” appears in the file
+        mydate
+        $ grep -o -i 'the' mydate | wc -l
+        31
+23) Find out the line numbers on which the string “date” exists in
+mydate
+        grep -n 'date' mydate
+
+24) Print all lines of mydate except those that have the letter “i” in
+them
+        grep -v 'i' mydate
+    
+25) List the words of 4 letters from the file mydate
+        grep -o '\b[a-zA-Z]\{4\}\b' mydate
+
+
+26) List 5 states in north India in a file mystates. List their
+corresponding capitals in a file mycapitals. Use the paste command
+to join the 2 files.
+        echo "Uttar Pradesh" > mystates
+        echo "Haryana" >> mystates
+        echo "Punjab" >> mystates
+        echo "Rajasthan" >> mystates
+        echo "Uttarakhand" >> mystates
+        echo "Lucknow" > mycapitals
+        echo "Chandigarh" >> mycapitals
+        echo "Chandigarh" >> mycapitals
+        echo "Jaipur" >> mycapitals
+        echo "Dehradun" >> mycapitals
+        paste mystates mycapitals
+
+27) Use the cut command to print the 1st and 3rd columns of the
+/etc/passwd file for all students in this class.
+
+    cut -d: -f1,3 /etc/passwd
+
+28) Count the number of people logged in and also trap the users in a
+file using the tee command .
+        who | tee logged_in_users.txt | wc -l > number_of_users.txt
+
+29) Convert the contents of mystates into uppercase
+        awk '{print toupper($0)}' mystates > mystates_uppercase
+
+30) Create any two files & display the common values between them
+        echo "apple" > file1.txt
+        echo "banana" >> file1.txt
+        echo "orange" >> file1.txt
+        echo "banana" > file2.txt
+        echo "grape" >> file2.txt
+        echo "apple" >> file2.txt
+        comm -12 <(sort file1.txt) <(sort file2.txt)
+
+
+/////////////////////////////////////////////////////////////////////////////////
+
+1. date: To display current date & time of the system.
+2. cal :To display calendar of current month.
+3. who:List who is currently logged on to the system.
+4. Whoami:Report what user you are logged on as.
+5. echo :Echo a string (or list of arguments) to the terminal
+6. bc:To perform mathematical operations
+7. clear:To clear the screen
+8. alias : Used to tailor commands
+Ex alias erase=rm
+alias grep=”grep -i”
+alias cp=“cp –i”
+9. man <cmd name>: To get help for any command
+10. passwd: To change the passward
+11. exit: To logout from the terminal
+4
+File & Directory Related Commands
+1. cp <fromfile> <tofile>: Copy from the <fromfile> to the <tofile>
+2. mv <fromfile> <tofile> : Move/rename the <fromfile> to the <tofile>
+3. rm <file>:Remove the file named <file>
+4. mkdir <newdir>:Make a new directory called <newdir>
+5. rmdir <dir>:Remove an (empty) directory
+6. cd <dir> :Change the current working directory to dir
+7. pwd : Print (display) the working directory
+8. cat > <file> :To create new file n save it by pressing ^d
+9. cat >> <file>: To append contents into file
+10. cat <file>:To see the contents of existing file
+11. more <file>:Paging out the contents of file
+12. file <file>:To check the type of file
+13. wc <file>:To count lines,words,charaters of file
+14. cmp <file1> <file2>:To compate two files
+15. comm <file1> <file2>:To display common values between two files
+16. diff <file1> <file2>:To convert one file to another
+17. gzip <file>:To compress the file
+18. gunzip <file>:To unzip the contents of
+19. ls :List the files in the current working directory
+20. ls <dir>:List all files & directories in given directory
+21. ln <fromfile><tofile>: Creates a symbolic link to a file
+Simple Filters
+1. pr <file> :Paginating the file
+Ex pr –h “test” –d –n fname
+2. head <file>:Display first 10 lines of file
+Ex head –n -3 fname
+3. tail <file> :To display last 10 lines of file
+Ex tail -3 fname ; tail –c 100 fname
+4. cut <file> :Splitting file vertically
+Ex cut –c 2-10,12-14 fname
+a. cut –d “|” –f 2,4 fname
+5. paste <file1> <file2> :To combine two file vertically rather than horizontally
+5
+Ex paste –d “|” fname1 fname2
+6. sort <file>:To sort file in order by field wise
+Ex sort –t”|” –k 2 fname
+a. sort –r fname
+7. uniq <file> :Locate repeated & nonrepeated
+lines Ex uniq fname; uniq –d fname
+8. tr ch1 ch2 < <file1>:To translate occurrence of ch1 by ch2
+Ex tr ‘|’ ‘+’ < fname1
+9. tee: read from standard input and write to standard output and files
+Ex. ls *.txt | wc -l | tee count.txt
+File permission: Use the chmod command to change file permissions
+1. Changing permission relative manner
+Category Operation Perm.
+u-user + assign r-read
+g-group - removal w-write
+o-other = assign abs perm. x-execute
+a-all
+Syntax: chmod category operation perm. <file>
+Ex chmod u+x fname
+chmod a+x fname
+chmod u-x fname
+chmod a-x,go+r fname
+2. Changing permission absolute
+manner Read=4
+Write =2
+Execute=1
+Ex chmod 666 fname
+chmod 644 fname
+chmod -R 644
+Change owner & group
+Syntax: chown options owner files
+Ex chown “xyz” fname
+6
+Syntax: chgrp options group files
+Ex chgrp “xyz” fname
+Redirection: Provide a powerful command line controls
+Most Linux commands read input, such as a file or another attribute for the command,
+and write output. By default, input is being given with the keyboard, and output is
+displayed on your screen. Your keyboard is your standard input (stdin) device, and the
+screen or a particular terminal window is the standard output (stdout) device
+There are 3 types of redirection available in linux
+1. Standard input redirection: It is used to redirect standard
+input. Ex. cat < fname
+2. Standard output redirection : It is used to redirect standard
+output. Ex cat >fname
+3. Standard error redirection: It is used to redirect standard
+error. Ex cat fname 2>Errorfile
+Pipe
+Connects commands so the output of one becomes input for the second
+Vertical bar(|) is the pipe operator.
+Ex. ls -l | more
+cat file1 file2 | sort > file3
+Concatenates file1 and file2
+Sends the result to the sort command
+Store the alphabetized, concatenate result as a new file called file3
+Grep: Global regular expression print
+Searching and pattern matching tools
+Searches files for one or more pattern arguments. It does plain string, basic regular
+expression, and extended regular expression searching
+Following are some of the options for grep
+-i ignore case for matching
+-v doesn’t display lines matching expression
+-n display line numbers along of occurrences
+7
+-c counting number of occurrences
+-l display list of file names
+-e exp for matching
+-f file take patterns from file
+-E treat pattern as an extended reg. exp
+-F matches multiple fixed strings (fgrep)
+
+
+
